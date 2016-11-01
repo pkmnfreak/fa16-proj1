@@ -11,6 +11,7 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'foundation-rails', '5.4.5'
 gem 'simple_form'
+ruby '2.3.0'
 
 group :development do
   gem 'sqlite3'
@@ -23,4 +24,5 @@ end
 group :production do
   gem 'pg'
   gem 'thin'
+  gem 'rails_12factor'
 end
