@@ -5,6 +5,7 @@
 <div>
 <% @trainer.pokemons.each do |a| %>
   <div>
+  <% if @trainer.id == current_trainer.id or a.health > 0 %>
   <%= 'Name' %>
   <%= 'Level' %>
   <%= 'Health' %>
@@ -12,8 +13,16 @@
   <%= a.name %>
   <%= a.level %>
   <%= a.health %>
+
+  <% if @trainer.id == current_trainer.id and a.health < 100%>
+    <%= button_to "Heal!", heal_path(id: a, trainer_id: @trainer), :class => "button small", :method => :patch %>
+    <% end %>
+
+  <% if a.health > 0 %>
   <%= button_to "Damage!", damage_path(id: a, trainer_id: @trainer), :class => "button small", :method => :patch %>
-<% end %>
+    <% end %>
+  <% end %>
+  <% end %>
 </div>
 
 <% if @trainer.id == current_trainer[:id] %>

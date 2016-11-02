@@ -8,13 +8,15 @@ class PokemonsController < ApplicationController
 
   def damage
     @pokemon = Pokemon.find_by trainer_id: params[:trainer_id], id: params[:id]
-    if @pokemon.health - 10 <= 0
-      @pokemon.destroy
-      redirect_to '/trainers/' + params[:trainer_id].to_s
-    else
-      @pokemon.update(health: (@pokemon.health-10))
-      redirect_to '/trainers/' + params[:trainer_id].to_s
-    end
+    @pokemon.update(health: (@pokemon.health-10))
+    redirect_to '/trainers/' + params[:trainer_id].to_s
+
+  end
+
+  def heal
+    @pokemon = Pokemon.find_by trainer_id: params[:trainer_id], id: params[:id]
+    @pokemon.update(health: (@pokemon.health+10))
+    redirect_to '/trainers/' + params[:trainer_id].to_s
   end
 
   def new
@@ -24,7 +26,7 @@ class PokemonsController < ApplicationController
   def create
     @pokemon = Pokemon.create(name: params["pokemon"]["name"])
     if @pokemon.valid?
-      Pokemon.create(name: params["pokemon"]["name"], trainer_id: current_trainer.id, health: 100, level: 1)
+      @pokemon.update(trainer_id: current_trainer.id, health: 100, level: 1)
       redirect_to '/trainers/' + current_trainer.id.to_s
     else
       redirect_to '/pokemon/new'

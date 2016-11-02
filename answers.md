@@ -21,3 +21,4 @@ This project is so cool! I love Pokemon! So much! The only thing that sucks now 
 The decal is cool too you guys are all so smart.
 
 # Extra credit: Link your Heroku deployed app
+https://pokemon-proj1.herokuapp.com/
